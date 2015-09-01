@@ -1,0 +1,148 @@
+#include "framework/audio/audio.h"
+#include "framework/file/file.h"
+
+void AudioManager::audio_callback(void* userdata, uint8_t* stream, int len)
+{
+    memset(stream, 0, len);
+
+    AudioManager* audioManager = (AudioManager*)userdata;
+    AudioData* data = nullptr;
+
+    if(audioManager->isPaused() || audioManager->getVolume() == 0 || audioManager->isMuted())
+    	return;
+
+    for(int i = 0; i <= audioManager->m_channels; i++)
+    {
+    	data = &audioManager->m_audioData[i];
+        if(!data->m_audio)
+            continue;
+
+        int32_t lenght = len > data->m_position ? data->m_position : len;
+        SDL_MixAudio(stream, data->m_buffer, lenght, audioManager->getVolume() * 128 / 100);
+
+        data->m_buffer += lenght;
+        data->m_position -= lenght;
+
+        if(!data->m_position)
+        {
+        	if(data->m_audio->isRepeatable())
+        	{
+                data->m_buffer = data->m_audio->getBuffer();
+                data->m_position = data->m_audio->getLenght();
+        	}
+        	else
+        	{
+        		data->m_audio = nullptr;
+        		data->m_buffer = NULL;
+        	}
+        }
+    }
+}
+
+AudioManager::AudioManager()
+{
+    m_channels = 12;
+    m_lastChannel = 0;
+    m_audioData = new AudioData[m_channels + 1];
+
+    for(int32_t i = 0; i <= m_channels; i++)
+    {
+        AudioData* data = &m_audioData[i];
+        data->m_position = 0;
+        data->m_buffer = NULL;
+        data->m_audio = nullptr;
+    }
+
+    m_want.freq = 44100;
+    m_want.format = AUDIO_S16LSB;
+    m_want.channels = 2;
+    m_want.samples = 4096;
+    m_want.callback = AudioManager::audio_callback;
+    m_want.userdata = this;
+
+    m_volume = 80;
+    m_stop = false;
+    m_muted = false;
+}
+
+AudioManager::~AudioManager()
+{
+	delete[] m_audioData;
+}
+
+void AudioManager::init()
+{
+    if(SDL_OpenAudio(&m_want, NULL))
+        LOGE("Couldn't open audio: %s\n", SDL_GetError());
+
+    SDL_PauseAudio(false);
+}
+
+void AudioManager::terminate()
+{
+	pause();
+    SDL_PauseAudio(true);
+    SDL_CloseAudio();
+    SDL_AudioQuit();
+}
+
+void AudioManager::play(Audio* audio)
+{
+	m_lastChannel++;
+	if(m_lastChannel > m_channels)
+		m_lastChannel = 0;
+
+    m_audioData[m_lastChannel].m_audioSpec = audio->getSpec();
+    m_audioData[m_lastChannel].m_position = audio->getLenght();
+    m_audioData[m_lastChannel].m_buffer = audio->getBuffer();
+    m_audioData[m_lastChannel].m_audio = audio;
+}
+
+void AudioManager::remove(Audio* audio)
+{
+    for(int32_t i = 0; i <= m_channels; i++)
+    {
+        AudioData* data = &m_audioData[i];
+    	if(data->m_audio == audio)
+    	{
+    		data->m_audio = nullptr;
+    		data->m_buffer = NULL;
+    	}
+    }
+}
+
+void AudioManager::mute()
+{
+    for(int32_t i = 0; i <= m_channels; i++)
+    {
+        AudioData* data = &m_audioData[i];
+    	data->m_audio = nullptr;
+    	data->m_buffer = NULL;
+    }
+}
+
+Audio::Audio(const std::string path)
+{
+	m_repeatable = false;
+
+	File file;
+    if(!file.open(path))
+        LOGE("unable to open file: %s", path.c_str());
+
+    file.seek(0);
+	char* buffer = file.getBuffer(file.getSize());
+	SDL_RWops* rw = SDL_RWFromConstMem(buffer, file.getSize());
+
+    if(!SDL_LoadWAV_RW(rw, 0, &m_audioSpec, &m_buffer, &m_length))
+        LOGE("Couldn't open file: %s\n", SDL_GetError());
+
+     m_audioSpec.callback = AudioManager::audio_callback;
+
+     SDL_FreeRW(rw);
+     delete[] buffer;
+}
+
+Audio::~Audio()
+{
+	SDL_FreeWAV(m_buffer);
+}

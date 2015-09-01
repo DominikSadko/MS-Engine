@@ -1,0 +1,71 @@
+#ifndef __AUDIO_H__
+#define __AUDIO_H__
+
+#include "framework/core/platform.h"
+#include "framework/lua/lua.h"
+
+class Audio : public Lua::Shared
+{
+	public:
+		Audio(const std::string file);
+		virtual ~Audio();
+
+		uint32_t getLenght()     const { return m_length; }
+		uint8_t* getBuffer()     const { return m_buffer; }
+		SDL_AudioSpec& getSpec()       { return m_audioSpec; }
+
+		void setRepeatable(bool value) { m_repeatable = value; }
+		bool isRepeatable()            { return m_repeatable; }
+
+	private:
+	    uint32_t m_length;
+	    uint8_t* m_buffer;
+	    SDL_AudioSpec m_audioSpec;
+	    bool m_repeatable;
+};
+
+class AudioManager : public Lua::Shared
+{
+	public:
+		AudioManager();
+		~AudioManager();
+
+		void init();
+		void terminate();
+
+		static void audio_callback(void* userdata, uint8_t* stream, int len);
+
+		void play(Audio* audio);
+		void remove(Audio* audio);
+		void mute();
+
+		void pause()  { m_stop = true; }
+		void resume() { m_stop = false; }
+
+		bool isPaused()  { return m_stop; }
+
+		void setMuted(bool muted) { m_muted = muted; }
+		bool isMuted() const { return m_muted; }
+
+		void setVolume(uint8_t volume) { m_volume = volume; }
+		uint8_t getVolume() const { return m_volume; }
+
+	private:
+		struct AudioData
+		{
+			int32_t m_position;
+		    uint8_t* m_buffer;
+			SDL_AudioSpec m_audioSpec;
+			Audio* m_audio;
+		};
+
+		int32_t m_channels, m_lastChannel;
+		SDL_AudioSpec m_want;
+		AudioData* m_audioData;
+
+		bool m_muted;
+		uint8_t m_volume;
+		bool m_stop;
+};
+
+#endif // __AUDIO_H__ //

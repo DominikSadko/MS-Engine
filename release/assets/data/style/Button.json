@@ -1,0 +1,29 @@
+{
+	"Layout":
+	{
+		"image-source": "gui",
+		"focusable": false,
+		"border": [2, 2, 2, 2],
+
+		"@on": {
+			"image-rect": [0, 20, 20, 20]
+		},
+
+		"!on": {
+			"image-rect": [0, 0, 20, 20]
+		},
+
+		"child":
+		[{
+			"Layout":
+			{
+				"id": "Title",
+				"phantom": true,
+				"text-font": "default",
+				"text-auto-resize": true,
+				"anchor.HorizontalCenter": ["parent", "HorizontalCenter"],
+				"anchor.VerticalCenter": ["parent", "VerticalCenter"]
+			}
+		}]
+	}
+}

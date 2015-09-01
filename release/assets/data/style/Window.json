@@ -1,0 +1,21 @@
+{
+	"Layout":
+	{
+		"image-source": "window",
+		"border": [3, 28, 3, 3],
+
+		"child":
+		[{
+			"Layout":
+			{
+				"id": "Title",
+				"phantom": true,
+				"text-font": "default",
+				"text-auto-resize": true,
+				"anchor.HorizontalCenter": ["parent", "HorizontalCenter"],
+				"anchor.Top": ["parent", "Top"],
+				"margin-Top": 3
+			}
+		}]
+	}
+}

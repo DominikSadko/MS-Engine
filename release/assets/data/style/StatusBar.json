@@ -1,0 +1,24 @@
+{
+	"Layout":
+	{
+		"image-source": "gui",
+		"image-rect": [32, 0, 80, 16],
+		"border": [2, 2, 2, 2],
+
+		"child":
+		[{
+			"Layout":
+			{
+				"id": "Progress",
+				"phantom": true,
+				"image-source": "gui",
+				"image-rect": [32, 0, 80, 16],
+				"border": [2, 2, 2, 2],
+				"anchor.Top": ["parent", "Top"],
+				"anchor.Bottom": ["parent", "Bottom"],
+				"anchor.Left": ["parent", "Left"],
+				"anchor.Width": ["parent", "Width"]
+			}
+		}]
+	}
+}

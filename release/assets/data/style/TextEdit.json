@@ -1,0 +1,10 @@
+{
+	"Layout":
+	{
+		"image-source": "gui",
+		"image-rect": [0, 65, 32, 32],
+		"border": [2, 2, 2, 2],
+		"height": 28,
+		"text-font": "verdana_22px"
+	}
+}

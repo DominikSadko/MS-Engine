@@ -1,0 +1,35 @@
+{
+	"Button":
+	{
+		"image-source": "gui-2",
+		"title-font": "scary_hallowed_18px",
+		"border": [21, 21, 21, 41],
+		"border-rect": [12, 12, 12, 21],
+
+		"@on": {
+			"image-rect": [165, 277, 128, 128],
+			"image-color": [230, 230, 230, 255]
+		},
+
+		"!on": {
+			"image-rect": [165, 277, 128, 128],
+			"image-color": [127, 127, 127, 255]
+		},
+
+		"ex-child":
+		[{
+			"Layout":
+			{
+				"id": "Title",
+				"text-color": [180, 120, 180, 255]
+			}
+		}]
+	},
+
+	"Panel":
+	{
+		"image-source": "gui-2",
+		"image-rect": [512, 512, 256, 256],
+		"border": [3, 3, 3, 3]
+	}
+}

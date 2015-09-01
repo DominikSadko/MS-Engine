@@ -1,0 +1,73 @@
+{
+	"Layout":
+	{
+		"class": "Widget",
+		"id": "MainMenu",
+		"fill": "parent",
+		"phantom": "true",
+		"image-source": "wallpaper",
+		"image-rect": [0, 0, 256, 256],
+
+		"child":
+		[{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "PlayGame",
+				"title": "Play Game",
+
+				"anchor.VerticalCenter": ["parent", "VerticalCenter"],
+				"anchor.Left": ["parent", "Width"],
+				"anchor.Right": ["parent", "Width"],
+				"scale-Left": 24,
+				"scale-Right": 24,
+
+				"anchor.Height": ["self", "Width"],
+				"scale-Height": 36
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "TestB",
+				"title": "B",
+				"anchor.Bottom": ["parent", "Bottom"],
+				"anchor.Right": ["parent", "Right"],
+
+				"anchor.Width": ["parent", "Width"],
+				"scale-Width": 10,
+				"anchor.Height": ["self", "Width"]
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "TestA",
+				"title": "A",
+				"anchor.Top": ["prev", "Top"],
+				"anchor.Right": ["prev", "Left"],
+				"scale-Right": 1,
+
+				"anchor.Width": ["parent", "Width"],
+				"scale-Width": 10,
+				"anchor.Height": ["self", "Width"]
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "Exit",
+				"title": "X",
+				"anchor.Top": ["parent", "Top"],
+				"anchor.Right": ["parent", "Right"],
+
+				"anchor.Width": ["parent", "Width"],
+				"scale-Width": 10,
+				"anchor.Height": ["self", "Width"]
+			}
+		}]
+	}
+}

@@ -1,0 +1,31 @@
+{
+	"Layout":
+	{
+		"image-source": "panel",
+		"border": [3, 28, 3, 3],
+		"movable": false,
+
+		"child":[{
+			"Layout":
+			{
+				"id": "VirtualContainer",
+				"phantom": true,
+				"focusable": false,
+				"movable": false,
+				"virtual-area": true,
+				"fill": "parent",
+
+				"child":
+				[{
+					"Layout":
+					{
+						"id": "WidgetsContainer",
+						"focusable": false,
+						"movable": false,
+						"fill": "parent"
+					}
+				}]
+			}
+		}]
+	}
+}

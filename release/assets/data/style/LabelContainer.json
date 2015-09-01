@@ -1,0 +1,22 @@
+{
+	"Layout":
+	{
+		"image-source": "panel",
+		"focusable": false,
+		"movable": false,
+		"virtual-area": true,
+
+		"child":
+		[{
+			"Layout":
+			{
+				"id": "WidgetsContainer",
+				"focusable": false,
+				"movable": false,
+				"anchor.Top": ["parent", "Top"],
+				"anchor.Left": ["parent", "Left"],
+				"anchor.Right": ["parent", "Right"]
+			}
+		}]
+	}
+}

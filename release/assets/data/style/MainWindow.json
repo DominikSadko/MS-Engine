@@ -1,0 +1,73 @@
+{
+	"Layout":
+	{
+		"image-source": "window",
+		"border": [3, 28, 3, 3],
+
+		"child":
+		[{
+			"Layout":
+			{
+				"id": "Title",
+				"phantom": true,
+				"text-font": "default",
+				"text-auto-resize": true,
+				"anchor.HorizontalCenter": ["parent", "HorizontalCenter"],
+				"anchor.Top": ["parent", "Top"]
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "moveBarBack",
+				"focusable": true,
+				"image-rect": [0, 100, 12, 12],
+				"border": [1, 1, 1, 1]
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "moveBarNext",
+				"focusable": true,
+				"image-rect": [0, 100, 12, 12],
+				"border": [1, 1, 1, 1]
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "ScrollBar",
+				"id": "moveBar",
+				"image-source": "gui",
+				"image-rect": [12, 100, 12, 24],
+				"border": [1, 1, 1, 1]
+			}
+		},
+		{
+			"Layout":
+			{
+				"id": "VirtualContainer",
+				"phantom": true,
+				"focusable": false,
+				"movable": false,
+				"virtual-area": true,
+				"fill": "parent",
+
+				"child":
+				[{
+					"Layout":
+					{
+						"id": "WidgetsContainer",
+						"phantom": true,
+						"focusable": false,
+						"movable": false,
+						"fill": "parent"
+					}
+				}]
+			}
+		}]
+	}
+}

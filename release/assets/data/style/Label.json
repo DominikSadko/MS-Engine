@@ -1,0 +1,13 @@
+{
+	"Layout":
+	{
+		"id": "Label",
+		"image-source": "panel",
+		"image-color": [0, 255, 0, 255],
+		"anchor.Left": ["parent", "Left"],
+		"anchor.Right": ["parent", "Right"],
+		"anchor.Top": ["parent", "Top"],
+		"movable": false,
+		"focusable": false
+	}
+}

@@ -1,0 +1,45 @@
+{
+	"Layout":
+	{
+		"id": "MapWindow",
+		"fill": "parent",
+		"movable": "false",
+		
+		"child":
+		[{
+			"Layout":
+			{
+				"class": "Button",
+				"id": "ExitGame",
+				"title": "X",
+
+				"anchor.Right": ["parent", "Right"],
+				"anchor.Top": ["parent", "Top"],
+				"margin-Right": 10,
+				"margin-Top": 10,
+
+				"anchor.Width": ["parent", "Width"],
+				"scale-Width": 5,
+				"anchor.Height": ["self", "Width"],
+				"scale-Height": 100
+			}
+		},
+		{
+			"Layout":
+			{
+				"class": "UITimer",
+				"id": "TimeText",
+
+				"size": [120, 30],
+				"focusable": false,
+				"movable": false,
+				"phantom": true,
+				"text-font": "verdana_22px",
+
+				"anchor.HorizontalCenter": ["parent", "HorizontalCenter"],
+				"anchor.Top": ["parent", "Top"],
+				"scale-Bottom": 5
+			}
+		}]
+	}
+}

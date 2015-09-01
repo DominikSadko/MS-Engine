@@ -1,0 +1,12 @@
+{
+	"Layout":
+	{
+		"image-source": "gui",
+		"focusable": false,
+		"movable": false,
+		"phantom": true,
+		"image-rect": [33, 65, 16, 16],
+		"border": [1, 1, 1, 1],
+		"text-font": "default"
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"Layout":
+	{
+		"focusable": false,
+		"movable": false,
+		"phantom": true,
+		"text-font": "verdana_22px",
+		"text-auto-resize": true
+	}
+}
