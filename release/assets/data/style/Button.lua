@@ -6,11 +6,7 @@ function Button.Create()
 	self:setResourceManager(g_resourceManager)
 	self:addLayout(g_resourceManager:getLayout("Button"))
 
-	-- title
-	local title = self:getChildById("Title")
-
 	g_event.mouse.add(Button.onMouseClick, nil, self)
-	g_event.hover.add(Button.onMouseHover, self)
 	return self
 end
 
@@ -27,28 +23,8 @@ end
 
 ---   event handlers   ---
 function Button.onMouseClick(self, executed, id, pos)
-	if(executed and self:isOn() == false) then
-		self:setOn(true)
-	elseif(not executed and self:isOn()) then
-		self:setOn(false)
-
-		if(self.click) then
-			self.click(self, id, pos)
-		end
-	end
-
-	if(self.mouseClick) then
-		self.mouseClick(self, executed, id, pos)
-	end
-end
-
-function Button.onMouseHover(self, id, hovered)
-	if(hovered == false and self:isOn()) then
-		self:setOn(false)
-	end
-
-	if(self.mouseHover) then
-		self.mouseHover(self, id, hovered)
+	if(not executed and self.click and self:isOn()) then
+		self.click(self, executed, id, pos)
 	end
 end
 

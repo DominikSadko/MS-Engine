@@ -2,34 +2,6 @@
 
 int32_t UIWidget::AutoId = 0;
 
-UIWidget* UIWidget::doCreateJsonChild(const json11::Json* json)
-{
-    UIWidget* child = nullptr;
-
-    json11::Json layout = *json;
-    if((*json)["Layout"])
-        layout = (*json)["Layout"];
-    else if((*json)["child"])
-        layout = (*json)["child"];
-
-    std::string className = "";
-    if(auto classNode = layout["class"])
-        className = stdex::toString(classNode);
-
-    if(!className.empty() && g_lua[className] && g_lua[className]["Create"])
-    {
-        child = g_lua[className]["Create"].call<UIWidget*>();
-        child->setParent(this);
-    }
-    else
-        child = doCreateChild();
-
-	child->setResourceManager(m_resourceManager);
-    child->setParent(this);
-    child->addLayout(json);
-    return child;
-}
-
 UIWidget::UIWidget()
 {
     setMetatable("UIWidget");
@@ -412,6 +384,34 @@ UIWidget* UIWidget::doCreateChild()
     return widget;
 }
 
+UIWidget* UIWidget::doCreateJsonChild(const json11::Json* json)
+{
+    UIWidget* child = nullptr;
+
+    json11::Json layout = *json;
+    if((*json)["Layout"])
+        layout = (*json)["Layout"];
+    else if((*json)["child"])
+        layout = (*json)["child"];
+
+    std::string className = "";
+    if(auto classNode = layout["class"])
+        className = stdex::toString(classNode);
+
+    if(!className.empty() && g_lua[className] && g_lua[className]["Create"])
+    {
+        child = g_lua[className]["Create"].call<UIWidget*>();
+        child->setParent(this);
+    }
+    else
+        child = doCreateChild();
+
+	child->setResourceManager(m_resourceManager);
+    child->setParent(this);
+    child->addLayout(json);
+    return child;
+}
+
 void UIWidget::setParent(UIWidget* parent)
 {
     if(m_parent)
@@ -557,12 +557,14 @@ UIWidget* UIWidget::getParentByRecursiveId(const std::string& id) const
 bool UIWidget::onMouseHover(uint8_t id, bool hovered)
 {
     g_lua["onMouseHover"].call(this, id, hovered);
+	hovered ? onLayout("@hovered")   : onLayout("!hovered");
     return true;
 }
 
 bool UIWidget::onMousePress(uint8_t id, const Point& pos, bool executed)
 {
     g_lua["onMousePress"].call(this, executed, id, pos);
+	executed ? onLayout("@pressed")   : onLayout("!pressed");
     return true;
 }
 

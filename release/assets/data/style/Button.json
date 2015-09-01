@@ -3,15 +3,15 @@
 	{
 		"image-source": "gui",
 		"focusable": false,
+		"movable": false,
 		"border": [2, 2, 2, 2],
 
-		"@on": {
-			"image-rect": [0, 20, 20, 20]
-		},
+		"@pressed": { "on": true },
+		"!pressed": { "on": false },
+		"!hovered": { "on": false },
 
-		"!on": {
-			"image-rect": [0, 0, 20, 20]
-		},
+		"@on": { "image-rect": [0, 20, 20, 20] },
+		"!on": { "image-rect": [0, 0, 20, 20] },
 
 		"child":
 		[{
