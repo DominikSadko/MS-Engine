@@ -22,10 +22,8 @@ end
 
 function CheckBox.set(self, checked, safe)
 	if(checked and self:isOn() == false) then
-		self:setImageRectY(self:getImageRectY() + self:getImageRectH())
 		self:setOn(true)
 	elseif(checked == false and self:isOn()) then
-		self:setImageRectY(self:getImageRectY() - self:getImageRectH())
 		self:setOn(false)
 	end
 

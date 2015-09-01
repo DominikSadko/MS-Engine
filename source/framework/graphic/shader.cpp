@@ -141,7 +141,6 @@ void Shader::setCoordsPosition(float* data)
 
 void Shader::draw(Shader::DrawMode mode, float vertexSize)
 {
-	glUniform1f(m_locations[Shader::Uniform_Time], 1.f);
     glUniformMatrix3fv(m_locations[Shader::Uniform_Projection], 1, false, m_matrixProjection.data());
     glUniformMatrix3fv(m_locations[Shader::Uniform_Translation], 1, false, m_matrixTranslation.data());
 

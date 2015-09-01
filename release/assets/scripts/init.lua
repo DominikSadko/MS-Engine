@@ -1,8 +1,6 @@
 g_resourceManager = nil
 g_audioManager = nil
-g_keyboard = nil
 g_tooltip = nil
-g_datatip = nil
 g_config = nil
 
 g_event = {}
@@ -93,15 +91,10 @@ function init()
 		doLoadStyle("ProgressBar")
 		doLoadStyle("StatusBar")
 		doLoadStyle("Tooltip")
-		doLoadStyle("Datatip") -- TODO
-		doLoadStyle("Keyboard")
 		doLoadStyle("MessageBox")
-		doLoadStyle("Item")
 		g_resourceManager:addLayout("Skin", "assets/module/Skin.json")
 
-		g_keyboard = Keyboard.Create()
 		g_tooltip = Tooltip.Create()
-		g_datatip = Datatip.Create()
 
 	print("*** Loading: config")
 		g_config:load()
@@ -113,7 +106,6 @@ function init()
 		g_resourceManager:addModule("module_menu", "assets/module/module_menu/menu.lua")
 
 	print("*** Loading:   ===   Done   ===")
-	--setDrawDimension({ w = 512, h = 512 })
 end
 
 function terminate()

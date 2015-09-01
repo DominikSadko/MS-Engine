@@ -1,7 +1,5 @@
 newMetatable("TextEdit", "UIWidget")
 
-TextEdit.useKeyboard = true
-
 function TextEdit.Create()
 	local self = TextEdit.new()
 	self:setMetatable("TextEdit")

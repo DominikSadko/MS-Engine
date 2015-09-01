@@ -3,7 +3,10 @@
 	{
 		"image-source": "gui",
 		"focusable": false,
-		"image-rect": [20, 0, 12, 12],
-		"size": [12, 12]
+		"movable": false,
+		"size": [12, 12],
+
+		"@on": { "image-rect": [20, 0, 12, 12] },
+		"!on": { "image-rect": [20, 12, 12, 12] }
 	}
 }
