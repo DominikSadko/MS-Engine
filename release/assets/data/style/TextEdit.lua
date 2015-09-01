@@ -12,6 +12,6 @@ end
 
 ---   usefull functions   ---
 
-function TextEdit.setTextLength(self, size)
+function TextEdit.setMaxSize(self, size)
 	self.maxSize = size
 end
