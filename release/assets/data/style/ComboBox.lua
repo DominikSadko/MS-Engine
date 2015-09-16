@@ -5,7 +5,7 @@ function ComboBoxMenu.Create()
 	local self = Panel.Create()
 	self:setMetatable("ComboBoxMenu")
 
-	self.comboBoxList = {}
+	self.m_comboBoxList = {}
 	return self
 end
 
@@ -13,12 +13,12 @@ function ComboBoxMenu.add(self, text)
 	local comboBox = ComboBox.Create(text)
 
 	comboBox:setParent(self)
-	if(#self.comboBoxList == 0) then
+	if(#self.m_comboBoxList == 0) then
 		comboBox:setAnchor(Anchor.Left, self, Anchor.Left)
 		comboBox:setAnchor(Anchor.Right, self, Anchor.Right)
 		comboBox:setAnchor(Anchor.Top, self, Anchor.Top)
 	else
-		local lastComboBox = self.comboBoxList[#self.comboBoxList]
+		local lastComboBox = self.m_comboBoxList[#self.m_comboBoxList]
 		comboBox:setAnchor(Anchor.Left, lastComboBox, Anchor.Left)
 		comboBox:setAnchor(Anchor.Right, lastComboBox, Anchor.Right)
 		comboBox:setAnchor(Anchor.Top, lastComboBox, Anchor.Bottom)
@@ -30,7 +30,7 @@ function ComboBoxMenu.add(self, text)
 		title:setText(text)
 	end
 
-	self.comboBoxList[#self.comboBoxList + 1] = comboBox
+	self.m_comboBoxList[#self.m_comboBoxList + 1] = comboBox
 	return comboBox
 end
 
@@ -78,11 +78,11 @@ function ComboBox.set(self, checked)
 	local comboBoxMenu = self:getParent()
 	local checkBox = self:getChildById("Box")
 
-	if(not comboBoxMenu.comboBoxList) then
+	if(not comboBoxMenu.m_comboBoxList) then
 		return
 	end
 
-	for i, v in ipairs(comboBoxMenu.comboBoxList) do
+	for i, v in ipairs(comboBoxMenu.m_comboBoxList) do
 		if(v ~= self and v:isOn()) then
 			v:set(false)
 		end
