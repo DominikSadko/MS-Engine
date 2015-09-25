@@ -15,16 +15,9 @@ int main(int, char*[])
     LOGI("Start APP");
 
     g_platform.init();
-
     g_fileManager.init();
-    g_fileManager.addSearchPath(g_platform.getPackagePath());
-    g_fileManager.addSearchPath(g_fileManager.getBaseDir());
-    g_fileManager.addSearchPath(g_platform.getCacheDir());
-    g_fileManager.setWriteDir(g_platform.getCacheDir());
-
     g_graphic = new Graphic();
-    g_painter.resetDrawArea();
-
+    g_painter.init();
     g_lua.init();
     LuaRegister();
 
