@@ -18,6 +18,7 @@ Painter::Painter()
 void Painter::init()
 {
     m_defaultShader = new Shader("assets/data/shaders/default.vert", "assets/data/shaders/default.frag");
+    resetDrawArea();
 }
 
 void Painter::draw()
@@ -143,6 +144,11 @@ void Painter::setPosition(const Point& point)
 void Painter::scale(float x, float y)
 {
     m_shader->scale(x, y);
+}
+
+void Painter::setDrawArea(int32_t width, int32_t height)
+{
+	setDrawArea({0, 0, width, height});
 }
 
 void Painter::setDrawArea(const Rect& rect)

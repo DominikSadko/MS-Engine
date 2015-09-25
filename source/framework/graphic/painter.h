@@ -26,6 +26,7 @@ class Painter
         void setRotation(const Point& point, float angle = 0);
         void setPosition(const Point& point);
         void scale(float x, float y);
+        void setDrawArea(int32_t width, int32_t height);
         void setDrawArea(const Rect& rect);
         void resetDrawArea();
 

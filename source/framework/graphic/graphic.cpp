@@ -41,7 +41,6 @@ Graphic::Graphic()
 
     init(mode.w, mode.h);
     Shader::init();
-    g_painter.init();
 }
 
 void Graphic::init(int32_t width, int32_t height)

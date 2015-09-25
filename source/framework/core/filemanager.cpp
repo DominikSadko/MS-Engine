@@ -17,6 +17,11 @@ void FileManager::init()
 {
     PHYSFS_init(NULL);
     PHYSFS_permitSymbolicLinks(1);
+
+    addSearchPath(g_platform.getPackagePath());
+    addSearchPath(g_platform.getCacheDir());
+    setWriteDir(g_platform.getCacheDir());
+    addSearchPath(getBaseDir());
 }
 
 void FileManager::terminate()
