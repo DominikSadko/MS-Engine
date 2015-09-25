@@ -3,10 +3,10 @@ Android/Windows framework in C++/Lua
 
 Example main code
 ```
+#include "framework/core/platform.h"
 #include "framework/graphic/graphic.h"
-#include "framework/scheduler/scheduler.h"
-#include "framework/lua/lua.h"
 #include "framework/core/filemanager.h"
+#include "framework/lua/lua.h"
 
 using namespace std;
 
