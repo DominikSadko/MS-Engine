@@ -1,11 +1,11 @@
+#include "framework/core/platform.h"
 #include "framework/graphic/graphic.h"
-#include "framework/scheduler/scheduler.h"
-#include "framework/lua/lua.h"
 #include "framework/core/filemanager.h"
+#include "framework/lua/lua.h"
 
 using namespace std;
 
-int main(int, char*[])
+int32_t main(int32_t, char*[])
 {
     LOGI("Start APP");
 
