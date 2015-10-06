@@ -3,7 +3,7 @@ precision  mediump     float;
 uniform    sampler2D   tex0;
 
 varying    vec2        vTexCoord;
-varying    vec4        vColor;
+uniform    vec4        Color;
 
 vec4 grayscale(vec4 color)
 {
@@ -13,5 +13,5 @@ vec4 grayscale(vec4 color)
 
 void  main()
 {
-	gl_FragColor = grayscale(texture2D(tex0, vTexCoord) * vColor);
+	gl_FragColor = grayscale(texture2D(tex0, vTexCoord) * Color);
 }

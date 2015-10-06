@@ -27,9 +27,11 @@ class Shader : public Lua::Shared
 			Uniform_Projection = 2,
 			Uniform_Translation = 3,
 			Uniform_Color = 4,
-			Uniform_Texture = 5,
+			Uniform_Time = 5,
+			Uniform_Resolution = 6,
+			Uniform_Texture = 7,
 
-			Uniform_Max = 8
+			Uniform_Max = 10
 		};
 
     public:

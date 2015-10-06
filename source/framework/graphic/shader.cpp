@@ -1,7 +1,10 @@
 #include "framework/graphic/shader.h"
 #include "framework/graphic/shaderWindows.h"
+#include "framework/graphic/graphic.h"
 #include "framework/core/filemanager.h"
 #include <stdex/format.h>
+
+int lightLocation = 0, lightColor = 0;
 
 Shader::Shader(const std::string& vertex, const std::string& fragment)
 {
@@ -59,7 +62,14 @@ Shader::Shader(const std::string& vertex, const std::string& fragment)
 
     m_locations[Shader::Uniform_Projection]     = glGetUniformLocation(m_program, "u_projection");
     m_locations[Shader::Uniform_Translation]    = glGetUniformLocation(m_program, "u_translation");
-    m_locations[Shader::Uniform_Color]          = glGetUniformLocation(m_program, "u_color");
+    m_locations[Shader::Uniform_Color]          = glGetUniformLocation(m_program, "Color");
+    m_locations[Shader::Uniform_Time]           = glGetUniformLocation(m_program, "Time");
+    m_locations[Shader::Uniform_Resolution]     = glGetUniformLocation(m_program, "Resolution");
+
+    if(lightColor <= 0) {
+    	lightLocation     = glGetUniformLocation(m_program, "lightLocation");
+    	lightColor     = glGetUniformLocation(m_program, "lightColor");
+    }
 
     for(uint8_t tex = 0; tex <= Shader::Uniform_Max - Shader::Uniform_Texture; tex++)
         m_locations[Shader::Uniform_Texture + tex] = glGetUniformLocation(m_program, stdex::toString("tex", tex).c_str());
@@ -143,6 +153,12 @@ void Shader::draw(Shader::DrawMode mode, float vertexSize)
 {
     glUniformMatrix3fv(m_locations[Shader::Uniform_Projection], 1, false, m_matrixProjection.data());
     glUniformMatrix3fv(m_locations[Shader::Uniform_Translation], 1, false, m_matrixTranslation.data());
+	glUniform1f(m_locations[Shader::Uniform_Time], getTicks());
+	glUniform2f(m_locations[Shader::Uniform_Resolution], g_graphic->getDrawDimension().w, g_graphic->getDrawDimension().h);
+
+	glUniform2f(lightLocation, 0.5, 0.5);
+	glUniform3f(lightColor, 1.f, 0.f, 1.f);
+
 
     if(mode == DrawMode::Triangle)
     	glDrawArrays(GL_TRIANGLES, 0, 6 * vertexSize);
@@ -249,10 +265,12 @@ void Shader::init()
     glUniform1i                = (PFNGLUNIFORM1IPROC)SDL_GL_GetProcAddress("glUniform1i");
     glUniform1f                = (PFNGLUNIFORM1FPROC)SDL_GL_GetProcAddress("glUniform1f");
     glUniform2f                = (PFNGLUNIFORM2FPROC)SDL_GL_GetProcAddress("glUniform2f");
+    glUniform3f                = (PFNGLUNIFORM3FPROC)SDL_GL_GetProcAddress("glUniform3f");
     glUniform4f                = (PFNGLUNIFORM4FPROC)SDL_GL_GetProcAddress("glUniform4f");
     glGetUniformLocation       = (PFNGLGETUNIFORMLOCATIONPROC)SDL_GL_GetProcAddress("glGetUniformLocation");
     glGetAttribLocation        = (PFNGLGETATTRIBLOCATIONPROC)SDL_GL_GetProcAddress("glGetAttribLocation");
     glVertexAttribPointer      = (PFNGLVERTEXATTRIBPOINTERPROC)SDL_GL_GetProcAddress("glVertexAttribPointer");
+    glVertexAttrib1f           = (PFNGLVERTEXATTRIB1FPROC)SDL_GL_GetProcAddress("glVertexAttrib1f");
     glUniformMatrix3fv         = (PFNGLUNIFORMMATRIX3FVPROC)SDL_GL_GetProcAddress("glUniformMatrix3fv");
 #endif
 }

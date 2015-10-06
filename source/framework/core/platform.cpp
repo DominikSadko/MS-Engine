@@ -64,6 +64,8 @@ void Platform::init()
         return;
     }
 
+    SDLNet_Init();
+
     m_rootWidget = new UIWidget();
     m_rootWidget->setPhantom(true);
     m_rootWidget->setId("RootWidget");
