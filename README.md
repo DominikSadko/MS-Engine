@@ -2,6 +2,12 @@
 Android/Windows framework in C++/Lua
 
 Example main code
+
+```
+sdfsdf
+```
+
+
 ```
 #include "framework/core/platform.h"
 #include "framework/graphic/graphic.h"
