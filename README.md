@@ -3,12 +3,7 @@ Android/Windows framework in C++/Lua
 
 Example main code
 
-```
-sdfsdf
-```
-
-
-```
+```c
 #include "framework/core/platform.h"
 #include "framework/graphic/graphic.h"
 #include "framework/core/filemanager.h"
